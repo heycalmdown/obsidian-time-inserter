@@ -1,10 +1,10 @@
 {
-	"id": "simple-time-inserter",
-	"name": "Simple Time Inserter",
-	"version": "1.0.0",
-	"minAppVersion": "1.4.13",
-	"description": "Insert current time at cursor position with exact or 5-minute rounded format",
-	"author": "Your Name",
-	"authorUrl": "https://github.com/yourusername",
-	"isDesktopOnly": false
+  "id": "obsidian-time-inserter",
+  "name": "Time Inserter",
+  "version": "1.0.0",
+  "minAppVersion": "1.4.13",
+  "description": "Insert current time at cursor position with exact or 5-minute rounded format",
+  "author": "heycalmdown",
+  "authorUrl": "https://github.com/heycalmdown",
+  "isDesktopOnly": false
 }

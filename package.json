@@ -1,27 +1,38 @@
 {
-	"name": "simple-time-inserter",
-	"version": "1.0.0",
-	"description": "Simple Obsidian plugin to insert current time at cursor position",
-	"main": "main.js",
-	"scripts": {
-		"dev": "node esbuild.config.mjs",
-		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
-		"version": "node version-bump.mjs && git add manifest.json versions.json",
-		"check": "tsc -noEmit",
-		"lint": "eslint src --ext .ts",
-		"lint:fix": "eslint src --ext .ts --fix"
-	},
-	"keywords": ["obsidian", "plugin", "typescript", "productivity"],
-	"author": "",
-	"license": "MIT",
-	"devDependencies": {
-		"@types/node": "^20.11.5",
-		"@typescript-eslint/eslint-plugin": "^6.19.0",
-		"@typescript-eslint/parser": "^6.19.0",
-		"builtin-modules": "^3.3.0",
-		"esbuild": "^0.19.11",
-		"obsidian": "latest",
-		"tslib": "^2.6.2",
-		"typescript": "^5.3.3"
-	}
+  "name": "obsidian-time-inserter",
+  "version": "1.0.0",
+  "description": "Obsidian plugin to insert current time at cursor position with exact or rounded formats",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "npm run lint && tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "version": "node version-bump.mjs && git add manifest.json versions.json",
+    "check": "tsc -noEmit",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "keywords": [
+    "obsidian",
+    "plugin",
+    "typescript",
+    "productivity",
+    "time",
+    "productivity-tools"
+  ],
+  "author": "heycalmdown",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "builtin-modules": "^3.3.0",
+    "esbuild": "^0.19.11",
+    "eslint": "^8.57.1",
+    "obsidian": "latest",
+    "prettier": "^3.6.2",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  }
 }

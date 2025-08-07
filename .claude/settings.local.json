@@ -8,7 +8,11 @@
       "Bash(npm run build:*)",
       "Bash(npm run check:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npm install:*)",
+      "Bash(mkdir:*)",
+      "WebFetch(domain:docs.obsidian.md)",
+      "Bash(gh repo create:*)"
     ],
     "deny": []
   }
