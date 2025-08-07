@@ -1,58 +1,43 @@
-import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import { App, Editor, Plugin, PluginSettingTab } from 'obsidian';
 
-interface PluginSettings {
-	exampleSetting: string;
-	enableFeature: boolean;
+interface TimeInserterSettings {
+	// No settings needed for this simple plugin
 }
 
-const DEFAULT_SETTINGS: PluginSettings = {
-	exampleSetting: 'default value',
-	enableFeature: true
-};
+const DEFAULT_SETTINGS: TimeInserterSettings = {};
 
-export default class ObsidianPluginBoilerplate extends Plugin {
-	settings!: PluginSettings;
+export default class SimpleTimeInserter extends Plugin {
+	settings!: TimeInserterSettings;
 
 	override async onload() {
 		await this.loadSettings();
 
-		// Add ribbon icon
-		const ribbonIconEl = this.addRibbonIcon('dice', 'Obsidian Plugin Boilerplate', (evt: MouseEvent) => {
-			new Notice('Hello from your plugin!');
-		});
-
-		ribbonIconEl.addClass('obsidian-plugin-boilerplate-ribbon-class');
-
-		// Add status bar item
-		const statusBarItemEl = this.addStatusBarItem();
-		statusBarItemEl.setText('Plugin Active');
-
-		// Add commands
+		// Command for inserting exact time
 		this.addCommand({
-			id: 'open-sample-modal',
-			name: 'Open Sample Modal',
-			callback: () => {
-				new SampleModal(this.app).open();
+			id: 'insert-exact-time',
+			name: 'Insert Exact Time',
+			editorCallback: (editor: Editor) => {
+				const timeString = this.getCurrentTime();
+				editor.replaceSelection(timeString);
 			}
 		});
 
+		// Command for inserting rounded time (5-minute intervals)
 		this.addCommand({
-			id: 'sample-editor-command',
-			name: 'Insert Sample Text',
+			id: 'insert-rounded-time',
+			name: 'Insert Rounded Time (5-minute intervals)',
 			editorCallback: (editor: Editor) => {
-				const cursor = editor.getCursor();
-				editor.replaceSelection('Sample text inserted by plugin');
+				const timeString = this.getRoundedTime();
+				editor.replaceSelection(timeString);
 			}
 		});
 
 		// Add settings tab
-		this.addSettingTab(new SettingTab(this.app, this));
-
-		console.log('Obsidian Plugin Boilerplate loaded');
+		this.addSettingTab(new TimeInserterSettingTab(this.app, this));
 	}
 
 	override onunload() {
-		console.log('Obsidian Plugin Boilerplate unloaded');
+		// Cleanup if needed
 	}
 
 	async loadSettings() {
@@ -62,37 +47,47 @@ export default class ObsidianPluginBoilerplate extends Plugin {
 	async saveSettings() {
 		await this.saveData(this.settings);
 	}
+
+	/**
+	 * Get current time in HH:MM format (24-hour)
+	 */
+	private getCurrentTime(): string {
+		const now = new Date();
+		const hours = now.getHours().toString().padStart(2, '0');
+		const minutes = now.getMinutes().toString().padStart(2, '0');
+		return `${hours}:${minutes}`;
+	}
+
+	/**
+	 * Get current time rounded to nearest 5-minute interval in HH:MM format (24-hour)
+	 */
+	private getRoundedTime(): string {
+		const now = new Date();
+		const hours = now.getHours();
+		const minutes = now.getMinutes();
+		
+		// Round minutes to nearest 5-minute interval
+		const roundedMinutes = Math.round(minutes / 5) * 5;
+		
+		// Handle minute overflow (e.g., 58 minutes rounds to 60)
+		let finalHours = hours;
+		let finalMinutes = roundedMinutes;
+		
+		if (roundedMinutes >= 60) {
+			finalHours = (hours + 1) % 24;
+			finalMinutes = 0;
+		}
+		
+		const hoursStr = finalHours.toString().padStart(2, '0');
+		const minutesStr = finalMinutes.toString().padStart(2, '0');
+		return `${hoursStr}:${minutesStr}`;
+	}
 }
 
-class SampleModal extends Modal {
-	constructor(app: App) {
-		super(app);
-	}
+class TimeInserterSettingTab extends PluginSettingTab {
+	plugin: SimpleTimeInserter;
 
-	override onOpen() {
-		const { contentEl } = this;
-		contentEl.setText('This is a sample modal!');
-		
-		const buttonContainer = contentEl.createDiv();
-		buttonContainer.style.textAlign = 'center';
-		buttonContainer.style.marginTop = '20px';
-		
-		const closeButton = buttonContainer.createEl('button', { text: 'Close' });
-		closeButton.addEventListener('click', () => {
-			this.close();
-		});
-	}
-
-	override onClose() {
-		const { contentEl } = this;
-		contentEl.empty();
-	}
-}
-
-class SettingTab extends PluginSettingTab {
-	plugin: ObsidianPluginBoilerplate;
-
-	constructor(app: App, plugin: ObsidianPluginBoilerplate) {
+	constructor(app: App, plugin: SimpleTimeInserter) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}
@@ -101,27 +96,18 @@ class SettingTab extends PluginSettingTab {
 		const { containerEl } = this;
 		
 		containerEl.empty();
-		containerEl.createEl('h2', { text: 'Plugin Settings' });
-
-		new Setting(containerEl)
-			.setName('Example Setting')
-			.setDesc('This is an example text setting')
-			.addText(text => text
-				.setPlaceholder('Enter some text')
-				.setValue(this.plugin.settings.exampleSetting)
-				.onChange(async (value) => {
-					this.plugin.settings.exampleSetting = value;
-					await this.plugin.saveSettings();
-				}));
-
-		new Setting(containerEl)
-			.setName('Enable Feature')
-			.setDesc('Toggle this feature on or off')
-			.addToggle(toggle => toggle
-				.setValue(this.plugin.settings.enableFeature)
-				.onChange(async (value) => {
-					this.plugin.settings.enableFeature = value;
-					await this.plugin.saveSettings();
-				}));
+		containerEl.createEl('h2', { text: 'Simple Time Inserter' });
+		
+		containerEl.createEl('p', { 
+			text: 'This plugin provides two commands to insert time at the cursor position:'
+		});
+		
+		const list = containerEl.createEl('ul');
+		list.createEl('li', { text: 'Insert Exact Time - Inserts current time in HH:MM format' });
+		list.createEl('li', { text: 'Insert Rounded Time - Inserts time rounded to nearest 5-minute interval' });
+		
+		containerEl.createEl('p', { 
+			text: 'Both commands use 24-hour format with zero-padded hours and minutes (e.g., 09:05, 14:35).'
+		});
 	}
 }

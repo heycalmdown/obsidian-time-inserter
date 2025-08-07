@@ -1,17 +1,5 @@
 /*
+Simple Time Inserter Plugin
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
-
-If your plugin does not need CSS, delete this file.
-
+This plugin doesn't require custom CSS styling.
 */
-
-.obsidian-plugin-boilerplate-ribbon-class {
-    color: var(--text-muted);
-    transition: color 0.2s ease-in-out;
-}
-
-.obsidian-plugin-boilerplate-ribbon-class:hover {
-    color: var(--text-normal);
-}

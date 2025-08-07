@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-plugin-boilerplate",
+	"name": "simple-time-inserter",
 	"version": "1.0.0",
-	"description": "A modern TypeScript boilerplate for Obsidian plugins",
+	"description": "Simple Obsidian plugin to insert current time at cursor position",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
