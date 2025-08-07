@@ -1,5 +1,5 @@
 {
-  "name": "obsidian-time-inserter",
+  "name": "time-inserter",
   "version": "1.0.0",
   "description": "Obsidian plugin to insert current time at cursor position with exact or rounded formats",
   "main": "main.js",

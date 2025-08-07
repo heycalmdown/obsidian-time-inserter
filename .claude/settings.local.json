@@ -12,7 +12,20 @@
       "Bash(npm install:*)",
       "Bash(mkdir:*)",
       "WebFetch(domain:docs.obsidian.md)",
-      "Bash(gh repo create:*)"
+      "Bash(gh repo create:*)",
+      "Bash(git push:*)",
+      "Bash(gh release create:*)",
+      "Bash(gh repo fork:*)",
+      "Bash(git clone:*)",
+      "Bash(git checkout:*)",
+      "Bash(git -C obsidian-releases add community-plugins.json)",
+      "Bash(git remote add:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git reset:*)",
+      "Bash(git rebase:*)",
+      "Bash(grep:*)",
+      "Bash(git branch:*)"
     ],
     "deny": []
   }
