@@ -11,6 +11,17 @@ This plugin provides two time insertion commands:
 
 All times are displayed in 24-hour format with zero-padded hours and minutes (e.g., 09:05, 14:35).
 
+## Lightweight & Fast
+
+This plugin is designed to be **ultra-lightweight** and **performance-friendly**:
+
+- **Zero dependencies** - No external libraries or packages
+- **No background processes** - Only runs when you invoke a command
+- **Minimal resource usage** - Won't slow down your Obsidian experience
+- **Instant execution** - Time insertion happens immediately without delay
+
+Perfect for users who want quick time insertion without any performance overhead.
+
 ## Installation
 
 1. Search for "Time Inserter" in Obsidian's Community plugins and install
