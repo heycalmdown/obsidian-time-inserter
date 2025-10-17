@@ -1,15 +1,11 @@
 # Time Inserter
 
-An Obsidian plugin that inserts the current time at the cursor position.
+An Obsidian plugin that inserts the current time at the cursor position, rounded to the nearest 5-minute interval.
 
 ## Features
 
-This plugin provides two time insertion commands:
-
-- **Insert Exact Time**: Inserts the current time in HH:MM format
-- **Insert Rounded Time**: Inserts time rounded to the nearest 5-minute interval in HH:MM format
-
-All times are displayed in 24-hour format with zero-padded hours and minutes (e.g., 09:05, 14:35).
+- Inserts time rounded to the nearest 5-minute interval in HH:MM format
+- 24-hour format with zero-padded hours and minutes (e.g., 09:05, 14:35)
 
 ## Lightweight & Fast
 
@@ -34,17 +30,16 @@ Perfect for users who want quick time insertion without any performance overhead
 
 Open the Command Palette (`Ctrl/Cmd + P`) and run:
 
-- `Time Inserter: Insert Exact Time` - Inserts current exact time
-- `Time Inserter: Insert Rounded Time (5-minute intervals)` - Inserts time rounded to 5-minute intervals
+- `Time Inserter: Insert rounded time (5-minute intervals)` - Inserts time rounded to 5-minute intervals
 
 ### Setting Hotkeys
 
-You can assign custom hotkeys to each command in Obsidian settings.
+You can assign a custom hotkey to the command in Obsidian settings.
 
 ## Examples
 
-- Exact time: `14:23`
-- Rounded time: `14:25` (14:23 rounded to 14:25)
+- `14:25` (14:23 rounded to 14:25)
+- `09:05` (09:03 rounded to 09:05)
 
 ## Development
 

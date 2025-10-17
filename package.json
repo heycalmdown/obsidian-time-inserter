@@ -1,7 +1,7 @@
 {
   "name": "time-inserter",
-  "version": "1.0.0",
-  "description": "Obsidian plugin to insert current time at cursor position with exact or rounded formats",
+  "version": "1.0.1",
+  "description": "Obsidian plugin to insert current time at cursor position, rounded to nearest 5-minute interval",
   "main": "main.js",
   "scripts": {
     "dev": "node esbuild.config.mjs",
